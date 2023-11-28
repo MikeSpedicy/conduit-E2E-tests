@@ -21,11 +21,9 @@
 !.vscode/extensions.json
 .history/*
 
-
 #System Files
 .DS_Store
 Thumbs.db
-
 
 #log files
 npm-debug.log*
@@ -35,6 +33,6 @@ yarn-error.log*
 .angular
 
 #java files
-\E2ETests\SeleniumAutomation\Java\.gradle
-\E2ETests\SeleniumAutomation\Java\build
-\E2ETests\SeleniumAutomation\Java\gradle
+E2ETests/SeleniumAutomation/Java/.gradle/
+E2ETests/SeleniumAutomation/Java/build/
+E2ETests/SeleniumAutomation/Java/gradle/
