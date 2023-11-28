@@ -2,15 +2,15 @@ import { Injectable, Logger } from '@nestjs/common';
 import { User } from '../models/user.model';
 import { UserRepository } from '../user.repository';
 import * as bcrypt from 'bcrypt';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const testSelectorsList = require('E2ETests/TestSelectorsList.json');
 
 const logger = new Logger();
+const isIncludeIssues: boolean = testSelectorsList.isIncludeIssues;
 
 @Injectable()
 export class UserService {
-
-  constructor(
-    private userRepository: UserRepository,
-  ) { }
+  constructor(private userRepository: UserRepository) {}
 
   async getAll() {
     logger.log('AUTH-SERVICE - Getting Users');
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   async getUserByEmail(email: string) {
-    logger.log('AUTH-SERVICE: FindUser triggered')
+    logger.log('AUTH-SERVICE: FindUser triggered');
     const found_user = await this.userRepository.getUserByEmail(email);
 
     if (found_user) {
@@ -38,7 +38,9 @@ export class UserService {
     logger.log('AUTH-SERVICE - Create User triggered');
 
     const existing_email = await this.userRepository.getUserByEmail(user.email);
-    const existing_username = await this.userRepository.getUserByUsername(user.username);
+    const existing_username = await this.userRepository.getUserByUsername(
+      user.username
+    );
 
     if (existing_email || existing_username) {
       logger.log('AUTH-SERVICE - Email or Username already taken');
@@ -74,13 +76,18 @@ export class UserService {
   async validateUser(user: User) {
     logger.log('AUTH-SERVICE - Validating User');
 
-    const found_user = await this.userRepository.getUserByEmail(user.email);
-    if (found_user) {
-      const isPasswordOk = await bcrypt.compare(user.password, found_user.password);
+    if (user.email || isIncludeIssues) {
+      const found_user = await this.userRepository.getUserByEmail(user.email);
+      if (found_user) {
+        const isPasswordOk = await bcrypt.compare(
+          user.password,
+          found_user.password
+        );
 
-      if (isPasswordOk) {
-        logger.log('AUTH-SERVICE - Login Successful');
-        return found_user;
+        if (isPasswordOk) {
+          logger.log('AUTH-SERVICE - Login Successful');
+          return found_user;
+        }
       }
     }
 

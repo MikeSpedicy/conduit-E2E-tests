@@ -5,20 +5,19 @@ import { Favorite } from './models/favorite.model';
 
 @Injectable()
 export class FavoriteRepository implements OnModuleInit {
-
-  constructor(private cassandraService: CassandraService) { }
+  constructor(private cassandraService: CassandraService) {}
 
   favoriteMapper: mapping.ModelMapper<Favorite>;
 
   onModuleInit() {
     const mappingOptions: mapping.MappingOptions = {
       models: {
-        'Favorites': {
+        Favorites: {
           tables: ['favorites'],
-          mappings: new mapping.UnderscoreCqlToCamelCaseMappings
-        }
-      }
-    }
+          mappings: new mapping.UnderscoreCqlToCamelCaseMappings(),
+        },
+      },
+    };
 
     this.favoriteMapper = this.cassandraService
       .createMapper(mappingOptions)
@@ -30,8 +29,9 @@ export class FavoriteRepository implements OnModuleInit {
   }
 
   async getByFavoritedBy(favorited_by: string) {
-    const res = await this.cassandraService.client
-      .execute(`SELECT * FROM favorites WHERE favorited_by = '${favorited_by}' ALLOW FILTERING`);
+    const res = await this.cassandraService.client.execute(
+      `SELECT * FROM favorites WHERE favorited_by = '${favorited_by}' ALLOW FILTERING`
+    );
 
     return res?.rows;
   }
@@ -41,6 +41,6 @@ export class FavoriteRepository implements OnModuleInit {
   }
 
   remove(favorite) {
-    return this.favoriteMapper.remove(favorite)
+    return this.favoriteMapper.remove(favorite);
   }
 }

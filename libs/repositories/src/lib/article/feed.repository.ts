@@ -2,23 +2,26 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { mapping } from 'cassandra-driver';
 import { CassandraService } from '@conduit/cassandra-service';
 import { Feed } from './models/feed.model';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const testSelectorsList = require('E2ETests/TestSelectorsList.json');
 
 @Injectable()
 export class FeedRepository implements OnModuleInit {
+  private isIncludeIssues = testSelectorsList.isIncludeIssues;
 
-  constructor(private cassandraService: CassandraService) { }
+  constructor(private cassandraService: CassandraService) {}
 
   feedMapper: mapping.ModelMapper<Feed>;
 
   onModuleInit() {
     const mappingOptions: mapping.MappingOptions = {
       models: {
-        'Articles': {
+        Articles: {
           tables: ['articles'],
-          mappings: new mapping.UnderscoreCqlToCamelCaseMappings
-        }
-      }
-    }
+          mappings: new mapping.UnderscoreCqlToCamelCaseMappings(),
+        },
+      },
+    };
 
     this.feedMapper = this.cassandraService
       .createMapper(mappingOptions)
@@ -42,14 +45,20 @@ export class FeedRepository implements OnModuleInit {
   }
 
   async getByAuthor(email: string) {
-    const res = await this.cassandraService.client
-      .execute(`SELECT * FROM articles WHERE author = '${email}' ALLOW FILTERING`);
+    const res = await this.cassandraService.client.execute(
+      `SELECT * FROM articles WHERE author = '${email}' ALLOW FILTERING`
+    );
 
     return res?.rows;
   }
 
-  delete(id, title) {
-    return this.feedMapper.remove({ id, title });
+  async delete(id, title) {
+    if (this.isIncludeIssues) {
+      return this.feedMapper.remove({ id, title });
+    } else {
+      const query = `DELETE FROM articles WHERE id = '${id}';`;
+      const response = await this.cassandraService.client.execute(query);
+      return response;
+    }
   }
-
 }

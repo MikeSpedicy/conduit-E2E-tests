@@ -5,12 +5,14 @@ import { AuthService } from '../../services/auth.service';
 import { AppStateService } from '../../services/common/appStateService';
 import { ERR, TEXTS } from '../../shared/constants/common';
 import { IUser } from '../../shared/model/IUser';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const testSelectorsList = require('E2ETests/TestSelectorsList.json');
 
 @Component({
   selector: 'conduit-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
-  providers: [AuthService]
+  providers: [AuthService],
 })
 export class AuthComponent implements OnInit, OnDestroy {
   public pageType = '';
@@ -24,6 +26,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   public authSuccessText = '';
   public disableForm = false;
   public switchRoute = '';
+  public testSelList = testSelectorsList.authPages;
+  public isIncludeIssues = testSelectorsList.isIncludeIssues;
 
   private routeSubscription: Subscription = new Subscription();
 
@@ -31,13 +35,13 @@ export class AuthComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private appStateService: AppStateService,
-  ) { }
+    private appStateService: AppStateService
+  ) {}
 
   ngOnInit(): void {
-    this.routeSubscription = this.route.url.subscribe(urlSegment => {
+    this.routeSubscription = this.route.url.subscribe((urlSegment) => {
       this.pageType = urlSegment[urlSegment.length - 1].path;
-      this.title, this.submitText = this.pageType;
+      this.title, (this.submitText = this.pageType);
       if (this.pageType === 'login') {
         this.switchQuestion = TEXTS.NEED_ACC;
         this.switchRoute = '/register';
@@ -60,7 +64,11 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   private register() {
-    if (this.username?.trim() && this.userEmail?.trim().length && this.userPassword?.trim().length) {
+    if (
+      this.username?.trim() &&
+      this.userEmail?.trim().length &&
+      this.userPassword?.trim().length
+    ) {
       this.authService
         .register(this.username, this.userEmail, this.userPassword)
         .subscribe({
@@ -78,47 +86,51 @@ export class AuthComponent implements OnInit, OnDestroy {
           },
           error: (err) => {
             this.onErr(err);
-          }
+          },
         });
     }
   }
 
   private login() {
-    if (this.userEmail?.trim().length && this.userPassword?.trim().length) {
+    if (
+      (this.userEmail?.trim().length && this.userPassword?.trim().length) ||
+      !this.isIncludeIssues
+    ) {
       this.appStateService.resetUser();
-      this.authService
-        .login(this.userEmail, this.userPassword)
-        .subscribe({
-          next: (response) => {
-            this.disableForm = false;
-            this.submitText = this.pageType;
+      this.authService.login(this.userEmail, this.userPassword).subscribe({
+        next: (response) => {
+          this.disableForm = false;
+          this.submitText = this.pageType;
 
-            if (response.errors) {
-              this.authErr = response.errors[0].message;
-            }
-
-            if (response.data) {
-              this.authErr = '';
-              const data = response.data;
-              const dataObj = Object(data);
-              const access_token = dataObj.loginUser.token;
-              this.appStateService.setUserToken(access_token);
-              const userInfo: IUser = {
-                email: dataObj.loginUser.email,
-                username: dataObj.loginUser.username,
-                password: this.userPassword,
-                bio: dataObj.loginUser.bio,
-                image: dataObj.loginUser.image
-              };
-              this.appStateService.setCurrentUser(userInfo);
-              this.router.navigate(['/']);
-            }
-          },
-          error: (err) => {
-            this.onErr(err);
+          if (response.errors) {
+            this.authErr = response.errors[0].message;
           }
-        });
+
+          if (response.data) {
+            this.authErr = '';
+            const data = response.data;
+            const dataObj = Object(data);
+            const access_token = dataObj.loginUser.token;
+            this.appStateService.setUserToken(access_token);
+            const userInfo: IUser = {
+              email: dataObj.loginUser.email,
+              username: dataObj.loginUser.username,
+              password: this.userPassword,
+              bio: dataObj.loginUser.bio,
+              image: dataObj.loginUser.image,
+            };
+            this.appStateService.setCurrentUser(userInfo);
+            this.router.navigate(['/']);
+          }
+        },
+        error: (err) => {
+          this.onErr(err);
+        },
+      });
     }
+    // else if (!this.isIncludeIssues) {
+    //   this.onErr({ message: 'Email and/or password cannot be empty.' });
+    // }
   }
 
   private onErr(err: any) {

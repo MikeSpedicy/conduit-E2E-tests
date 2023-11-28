@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - LoginMain</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>LoginMain</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/tests.Login.html">tests.Login</a> &gt; LoginMain</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">8.232s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Authorization - Negative - Incorrect password &amp; correct email</td>
+<td class="success">AuthNeg1()</td>
+<td class="success">0.939s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Incorrect email &amp; correct password</td>
+<td class="success">AuthNeg2()</td>
+<td class="success">0.888s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Unexisting but valid email and password</td>
+<td class="success">AuthNeg3()</td>
+<td class="success">0.878s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Unexisting and invalid email and password</td>
+<td class="success">AuthNeg4()</td>
+<td class="success">0.878s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Empty email and password</td>
+<td class="success">AuthNeg5()</td>
+<td class="success">0.867s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Empty email and filled password</td>
+<td class="success">AuthNeg6()</td>
+<td class="success">0.856s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Negative - Filled email and empty password</td>
+<td class="success">AuthNeg7()</td>
+<td class="success">0.850s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Authorization - Positive</td>
+<td class="success">AuthPos()</td>
+<td class="success">1.321s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Check Login Page</td>
+<td class="success">CheckLoginPage()</td>
+<td class="success">0.755s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>updFirstUserData - {&quot;email&quot;:&quot;first@created.user&quot;,&quot;password&quot;:&quot;Qwerty123&quot;,&quot;username&quot;:&quot;First User&quot;,&quot;image&quot;:&quot;https://api.realworld.io/images/smiley-cyrus.jpeg&quot;,&quot;bio&quot;:&quot;123&quot;}
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;first@created.user&quot;,&quot;password&quot;:&quot;Qwerty123&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;data&quot;:{&quot;loginUser&quot;:{&quot;email&quot;:&quot;first@created.user&quot;,&quot;token&quot;:&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZpcnN0QGNyZWF0ZWQudXNlciIsImJpbyI6IjEyMyIsImltYWdlIjoiaHR0cHM6Ly9hcGkucmVhbHdvcmxkLmlvL2ltYWdlcy9zbWlsZXktY3lydXMuanBlZyIsInBhc3N3b3JkIjoiJDJiJDEwJHhLVGw1Z25obmE5ZVFCLkZPelhoeXU1cjlwd1hVdVpZTGVpNjZra1dRRXdMb3VmVjd0M21xIiwidXNlcm5hbWUiOiJGaXJzdCBVc2VyIiwiaWF0IjoxNzAxMTE1MDU2LCJleHAiOjE3MDExMTg2NTZ9.TiZm1apaotNq3J29NkaKuYzxqscoIpUHb_m1sIpBugM&quot;,&quot;username&quot;:&quot;First User&quot;,&quot;image&quot;:&quot;https://api.realworld.io/images/smiley-cyrus.jpeg&quot;,&quot;bio&quot;:&quot;123&quot;,&quot;__typename&quot;:&quot;LoginUserOutput&quot;}}}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;first@created.user&quot;,&quot;password&quot;:&quot;Qwerty123a&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;first@created.usera&quot;,&quot;password&quot;:&quot;Qwerty123&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;first@created.usera&quot;,&quot;password&quot;:&quot;Qwerty123a&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;a&quot;,&quot;password&quot;:&quot;a&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;&quot;,&quot;password&quot;:&quot;&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;&quot;,&quot;password&quot;:&quot;a&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+requestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+requestBody - {&quot;operationName&quot;:&quot;login&quot;,&quot;variables&quot;:{&quot;email&quot;:&quot;a&quot;,&quot;password&quot;:&quot;&quot;},&quot;query&quot;:&quot;query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}&quot;}
+responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+responseBody - {&quot;errors&quot;:[{&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;extensions&quot;:{&quot;code&quot;:&quot;404&quot;,&quot;response&quot;:{&quot;statusCode&quot;:404,&quot;message&quot;:&quot;Incorrect Username or Password&quot;,&quot;error&quot;:&quot;Not Found&quot;}}}],&quot;data&quot;:null}
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.4</a> at Nov 27, 2023, 9:57:44 PM</p>
+</div>
+</div>
+</body>
+</html>

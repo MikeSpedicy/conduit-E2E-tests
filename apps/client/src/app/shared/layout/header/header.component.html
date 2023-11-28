@@ -1,30 +1,66 @@
 <nav class="navbar navbar-light">
   <div class="container">
-    <a class="navbar-brand" href="#/">conduit</a>
+    <a class="navbar-brand" href="#/" [attr.data-test]="testSelList.logoElement"
+      >conduit</a
+    >
     <ul class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">Home</a>
+      <li class="nav-item" *ngIf="isIncludeIssues || userInfo">
+        <a
+          class="nav-link"
+          routerLink="/"
+          [routerLinkActive]="isIncludeIssues ? 'false' : 'active'"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [attr.data-test]="testSelList.navButtons.home"
+          >Home</a
+        >
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isIncludeIssues || userInfo">
+        <a
+          class="nav-link"
+          routerLink="/editor"
+          routerLinkActive="active"
+          [attr.data-test]="testSelList.navButtons.newArticle"
+        >
           <i class="ion-compose"></i>&nbsp;New Article
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/settings" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isIncludeIssues || userInfo">
+        <a
+          class="nav-link"
+          routerLink="/settings"
+          routerLinkActive="active"
+          [attr.data-test]="testSelList.navButtons.settings"
+        >
           <i class="ion-gear-a"></i>&nbsp;Settings
         </a>
       </li>
       <li class="nav-item" *ngIf="!userInfo">
-        <a class="nav-link" routerLink="/login" routerLinkActive="active">Sign in</a>
+        <a
+          class="nav-link"
+          routerLink="/login"
+          routerLinkActive="active"
+          [attr.data-test]="testSelList.navButtons.signIn"
+          >Sign in</a
+        >
       </li>
       <li class="nav-item" *ngIf="!userInfo">
-        <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign up</a>
+        <a
+          class="nav-link"
+          routerLink="/register"
+          routerLinkActive="active"
+          [attr.data-test]="testSelList.navButtons.signUp"
+          >Sign up</a
+        >
       </li>
       <li class="nav-item" *ngIf="userInfo">
-        <a class="nav-link ng-binding" routerLink="/profile/{{userInfo.username}}" routerLinkActive="active">
-          <img src="{{userInfo.image}}" class="user-pic">
-          {{userInfo && userInfo.username}}
+        <a
+          class="nav-link ng-binding"
+          routerLink="/profile/{{ userInfo.username }}"
+          routerLinkActive="active"
+          [attr.data-test]="testSelList.avatarImage"
+        >
+          <img src="{{ userInfo.image }}" class="user-pic" />
+          {{ userInfo && userInfo.username }}
         </a>
       </li>
     </ul>

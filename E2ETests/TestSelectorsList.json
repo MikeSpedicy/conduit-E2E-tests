@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
+  "isIncludeIssues": false,
+  "attrName": "data-test=",
+  "authPages": {
+    "accountLink": "accountLink",
+    "nameInput": "nameInput",
+    "emailInput": "emailInput",
+    "passwordInput": "passwordInput",
+    "submitButton": "submitButton",
+    "errorMessageBlock": "errorMessageBlock",
+    "successMessageBlock": "successMessageBlock"
+  },
+  "multiPagesElements": {
+    "navBarBlock": {
+      "logoElement": "logoElement",
+      "avatarImage": "avatarImage",
+      "navButtons": {
+        "home": "homeButton",
+        "newArticle": "newArticleButton",
+        "settings": "settingsButton",
+        "signIn": "signInButton",
+        "signUp": "signUpButton"
+      }
+    },
+    "footerBlock": "footerBlock"
+  }
+}

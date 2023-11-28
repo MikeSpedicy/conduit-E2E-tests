@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'dev.selenium'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+    implementation 'javax.json:javax.json-api:1.1.4'
+    implementation 'org.glassfish:javax.json:1.1.4'
+}
+
+tasks.withType(Test) {
+    outputs.upToDateWhen { false }
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,7 +1,5 @@
 {
-    "editor.tabSize": 2,
-    "cSpell.words": [
-        "favorited",
-        "Unfollow"
-    ]
+  "editor.tabSize": 2,
+  "cSpell.words": ["favorited", "Unfollow"],
+  "java.configuration.updateBuildConfiguration": "automatic"
 }

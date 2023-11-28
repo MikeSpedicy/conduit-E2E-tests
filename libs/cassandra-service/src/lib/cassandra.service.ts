@@ -3,35 +3,40 @@ import { Client, mapping, auth } from 'cassandra-driver';
 
 @Injectable()
 export class CassandraService {
-
   client: Client;
   mapper: mapping.Mapper;
 
   private createClient() {
     // Local Connection
     // this.client = new Client({
-    //   contactPoints: ['0.0.0.0'],
+    //   contactPoints: ['localhost'],
     //   keyspace: 'conduit',
     //   localDataCenter: 'datacenter1',
-    //   authProvider: new auth.PlainTextAuthProvider('cassandra', 'cassandra')
+    //   authProvider: new auth.PlainTextAuthProvider('cassandra', 'cassandra'),
     // });
 
     // Astra connection
     this.client = new Client({
       cloud: {
-        secureConnectBundle: "./secure-connect-my-database.zip",
+        secureConnectBundle:
+          // Astra's DB secure-connect data
+          './libs/cassandra-service/src/lib/secure-connect-conduit-test-db.zip',
       },
       credentials: {
-        username: "AkiBmOqyoSFKPmgtHidMfPgB",
-        password: ",Zerz,3jAZ563XT92TpSl3wOZr,I5nlp_H6Fh,oGf4xhchLjgy0g+YqfFwQ,5PZMtbWEL1E9zThZy+oq9RFo8HlH-SACBGgp9y5F0_R55ONAZHYZh.UNcKYmMjk4ha0g",
+        // Astra's clientId value
+        username: '',
+        // Astra's secret value
+        password: '',
       },
-      keyspace: "conduit"
+      // keyspace of your DB
+      keyspace: 'conduit_test_db',
     });
   }
 
   createMapper(mappingOptions: mapping.MappingOptions) {
     if (this.client == undefined) {
       this.createClient();
+      this.client.connect();
     }
     return new mapping.Mapper(this.client, mappingOptions);
   }

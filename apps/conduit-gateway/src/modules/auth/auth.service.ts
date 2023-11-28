@@ -4,7 +4,7 @@ import {
   Logger,
   OnModuleInit,
   NotFoundException,
-  BadRequestException
+  BadRequestException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ClientKafka, RpcException } from '@nestjs/microservices';
@@ -20,11 +20,10 @@ const logger = new Logger();
 
 @Injectable()
 export class AuthService implements OnModuleInit {
-
   constructor(
     @Inject('AUTH-SERVICE') private readonly authClient: ClientKafka,
     private jwtService: JwtService
-  ) { }
+  ) {}
 
   onModuleInit() {
     this.authClient.subscribeToResponseOf('users_list');
@@ -35,27 +34,26 @@ export class AuthService implements OnModuleInit {
   }
 
   getUsers() {
-    return this.authClient.send('users_list', {}).pipe(
-      map((users: User[]) => (users))
-    )
+    return this.authClient
+      .send('users_list', {})
+      .pipe(map((users: User[]) => users));
   }
 
   getUser(email: string) {
-    return this.authClient.send('get_user_by_email', email).pipe(
-      map(r_user => r_user)
-    )
+    return this.authClient
+      .send('get_user_by_email', email)
+      .pipe(map((r_user) => r_user));
   }
 
   createUser(user: CreateUserInput) {
-    logger.log('GATEWAY - Create user service')
+    logger.log('GATEWAY - Create user service');
 
     return this.authClient.send('user_creation', user).pipe(
-      map(newUser => {
+      map((newUser) => {
         if (!newUser) {
           logger.log('GATEWAY - User creation failed');
           throw new BadRequestException('Email or Username already taken');
         }
-
 
         logger.log('GATEWAY - User created successfully');
 
@@ -70,7 +68,7 @@ export class AuthService implements OnModuleInit {
     logger.log('GATEWAY - Update user service');
 
     return this.authClient.send('user_update', user).pipe(
-      map(updatedUser => {
+      map((updatedUser) => {
         if (!updatedUser) {
           logger.log('GATEWAY - User not updated');
           return new RpcException('User not found');
@@ -83,19 +81,19 @@ export class AuthService implements OnModuleInit {
   }
 
   async validateUser(user: ValidateUserInput) {
-    return this.authClient.send('validate_user', user).pipe(
-      map(validUser => validUser)
-    );
+    return this.authClient
+      .send('validate_user', user)
+      .pipe(map((validUser) => validUser));
   }
 
   async login(user: LoginUserInput) {
     return this.authClient.send('validate_user', user).pipe(
-      map(validUser => {
+      map((validUser) => {
         if (validUser) {
           return {
             ...validUser,
-            token: this.jwtService.sign(validUser)
-          }
+            token: this.jwtService.sign(validUser),
+          };
         }
 
         throw new NotFoundException('Incorrect Username or Password');

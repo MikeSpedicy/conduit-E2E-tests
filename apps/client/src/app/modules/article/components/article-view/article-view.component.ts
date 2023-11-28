@@ -36,15 +36,15 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
     private readonly articleService: ArticleService,
     private readonly commentService: CommentService,
     private readonly utilities: Utilities,
-    private readonly profileService: ProfileService,
-  ) { }
+    private readonly profileService: ProfileService
+  ) {}
 
   ngOnInit(): void {
     this.init();
   }
 
   init() {
-    this.routeSubscription = this.route.url.subscribe(urlSegment => {
+    this.routeSubscription = this.route.url.subscribe((urlSegment) => {
       const slug = urlSegment[urlSegment.length - 1].path;
       this.articleID = slug.split('_').pop() || '';
       this.getFeed();
@@ -70,9 +70,9 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
               this.article = Object(data).getArticleByID as IArticle;
             }
           },
-          error: err => {
+          error: (err) => {
             this.utilities.onErr(err);
-          }
+          },
         });
     }
   }
@@ -81,7 +81,7 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
     this.commentService
       .getByArticle(this.articleID, AppStateService.getUserTokenStatic())
       .subscribe({
-        next: response => {
+        next: (response) => {
           if (response.errors) {
             this.comments = [];
             this.utilities.onErr(response.errors[0]);
@@ -90,12 +90,18 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
           if (response.data) {
             const data = response.data;
             this.comments = Object(data).getCommentsByArticle as IComment[];
-            this.comments = this.comments.slice().sort((prev, next) => new Date(next.created_at).getTime() - new Date(prev.created_at).getTime());
+            this.comments = this.comments
+              .slice()
+              .sort(
+                (prev, next) =>
+                  new Date(next.created_at).getTime() -
+                  new Date(prev.created_at).getTime()
+              );
           }
         },
         error: (err) => {
           this.utilities.onErr(err);
-        }
+        },
       });
   }
 
@@ -105,25 +111,23 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
       author: this.currentUser.email,
       article: this.articleID,
       created_at: new Date().toISOString(),
-    }
+    };
 
-    this.commentService
-      .create(comment, this.token)
-      .subscribe({
-        next: (response) => {
-          if (response.errors) {
-            this.utilities.onErr(response.errors[0]);
-          }
-
-          this.comment = '';
-          this.getComments();
-        },
-        error: (err) => {
-          this.comment = '';
-          this.getComments();
-          this.utilities.onErr(err);
+    this.commentService.create(comment, this.token).subscribe({
+      next: (response) => {
+        if (response.errors) {
+          this.utilities.onErr(response.errors[0]);
         }
-      });
+
+        this.comment = '';
+        this.getComments();
+      },
+      error: (err) => {
+        this.comment = '';
+        this.getComments();
+        this.utilities.onErr(err);
+      },
+    });
   }
 
   onFavorite(article: IArticle) {
@@ -147,7 +151,7 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
             this.disableFavBtn = false;
 
             this.utilities.onErr(err);
-          }
+          },
         });
     } else {
       this.articleService
@@ -167,7 +171,7 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
             this.disableFavBtn = false;
 
             this.utilities.onErr(err);
-          }
+          },
         });
     }
   }
@@ -182,49 +186,45 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
   }
 
   follow() {
-    this.profileService.follow(
-      this.article.author.email,
-      this.currentUser.email,
-      this.token
-    ).subscribe({
-      next: (response) => {
-        this.disableFollowBtn = false;
-        if (response.errors) {
-          this.utilities.onErr(response.errors[0]);
-        }
+    this.profileService
+      .follow(this.article.author.email, this.currentUser.email, this.token)
+      .subscribe({
+        next: (response) => {
+          this.disableFollowBtn = false;
+          if (response.errors) {
+            this.utilities.onErr(response.errors[0]);
+          }
 
-        if (response && response.data) {
-          this.init();
-        }
-      },
-      error: (err) => {
-        this.disableFollowBtn = false;
-        this.utilities.onErr(err);
-      }
-    })
+          if (response && response.data) {
+            this.init();
+          }
+        },
+        error: (err) => {
+          this.disableFollowBtn = false;
+          this.utilities.onErr(err);
+        },
+      });
   }
 
   unfollow() {
-    this.profileService.unfollow(
-      this.article.author.email,
-      this.currentUser.email,
-      this.token
-    ).subscribe({
-      next: (response) => {
-        this.disableFollowBtn = false;
-        if (response.errors) {
-          this.utilities.onErr(response.errors[0]);
-        }
+    this.profileService
+      .unfollow(this.article.author.email, this.currentUser.email, this.token)
+      .subscribe({
+        next: (response) => {
+          this.disableFollowBtn = false;
+          if (response.errors) {
+            this.utilities.onErr(response.errors[0]);
+          }
 
-        if (response && response.data) {
-          this.init();
-        }
-      },
-      error: (err) => {
-        this.disableFollowBtn = false;
-        this.utilities.onErr(err);
-      }
-    })
+          if (response && response.data) {
+            this.init();
+          }
+        },
+        error: (err) => {
+          this.disableFollowBtn = false;
+          this.utilities.onErr(err);
+        },
+      });
   }
 
   deleteArticle() {
@@ -243,29 +243,29 @@ export class ArticleViewComponent implements OnInit, OnDestroy {
         error: (err) => {
           this.disableDeleteArticle = true;
           this.utilities.onErr(err);
-        }
-      })
+        },
+      });
   }
 
   deleteComment(comment: IComment) {
     if (comment?.id && !this.disableCommentDelete) {
       this.disableCommentDelete = true;
 
-      this.commentService
-        .delete(comment.id, this.token)
-        .subscribe({
-          next: (response) => {
-            this.disableCommentDelete = false;
-            if (response.errors) {
-              this.utilities.onErr(response.errors[0]);
-            }
-            this.getComments();
-          },
-          error: (err) => {
-            this.disableCommentDelete = false;
-            this.utilities.onErr(err);
+      this.commentService.delete(comment.id, this.token).subscribe({
+        next: (response) => {
+          this.disableCommentDelete = false;
+          if (response.errors) {
+            console.error('error debugging');
+            this.utilities.onErr(response.errors[0]);
           }
-        })
+          this.getComments();
+        },
+        error: (err) => {
+          console.error(err);
+          this.disableCommentDelete = false;
+          this.utilities.onErr(err);
+        },
+      });
     }
   }
 

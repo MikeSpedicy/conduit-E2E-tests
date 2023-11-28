@@ -1,0 +1,46 @@
+ªupdFirstUserData - {"email":"first@created.user","password":"Qwerty123","username":"First User","image":"https://api.realworld.io/images/smiley-cyrus.jpeg","bio":"123"}
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+³requestBody - {"operationName":"login","variables":{"email":"first@created.user","password":"Qwerty123"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ØresponseBody - {"data":{"loginUser":{"email":"first@created.user","token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZpcnN0QGNyZWF0ZWQudXNlciIsImJpbyI6IjEyMyIsImltYWdlIjoiaHR0cHM6Ly9hcGkucmVhbHdvcmxkLmlvL2ltYWdlcy9zbWlsZXktY3lydXMuanBlZyIsInBhc3N3b3JkIjoiJDJiJDEwJHhLVGw1Z25obmE5ZVFCLkZPelhoeXU1cjlwd1hVdVpZTGVpNjZra1dRRXdMb3VmVjd0M21xIiwidXNlcm5hbWUiOiJGaXJzdCBVc2VyIiwiaWF0IjoxNzAxMTE1MDU2LCJleHAiOjE3MDExMTg2NTZ9.TiZm1apaotNq3J29NkaKuYzxqscoIpUHb_m1sIpBugM","username":"First User","image":"https://api.realworld.io/images/smiley-cyrus.jpeg","bio":"123","__typename":"LoginUserOutput"}}}
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+´requestBody - {"operationName":"login","variables":{"email":"first@created.user","password":"Qwerty123a"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+´requestBody - {"operationName":"login","variables":{"email":"first@created.usera","password":"Qwerty123"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+µrequestBody - {"operationName":"login","variables":{"email":"first@created.usera","password":"Qwerty123a"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+šrequestBody - {"operationName":"login","variables":{"email":"a","password":"a"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+˜requestBody - {"operationName":"login","variables":{"email":"","password":""},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+	vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+	™requestBody - {"operationName":"login","variables":{"email":"","password":"a"},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+	€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+	ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+	
+
+vrequestHeader - [Origin, sec-ch-ua, sec-ch-ua-mobile, Accept, sec-ch-ua-platform, Referer, User-Agent, Content-Type]
+
+™requestBody - {"operationName":"login","variables":{"email":"a","password":""},"query":"query login($email: String!, $password: String!) {\n  loginUser(user: {email: $email, password: $password}) {\n    email\n    token\n    username\n    image\n    bio\n    __typename\n  }\n}"}
+
+€responseHeader - [Keep-Alive, Access-Control-Allow-Origin, ETag, Connection, Content-Length, Date, X-Powered-By, Content-Type]
+
+ÎresponseBody - {"errors":[{"message":"Incorrect Username or Password","extensions":{"code":"404","response":{"statusCode":404,"message":"Incorrect Username or Password","error":"Not Found"}}}],"data":null}
+
+

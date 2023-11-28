@@ -12,18 +12,15 @@ import { ProfileService } from './profile.service';
         options: {
           client: {
             clientId: 'profile-service',
-            brokers: ['localhost:9092']
+            brokers: ['localhost:9092'],
           },
           consumer: {
-            groupId: 'profile-service'
-          }
-        }
+            groupId: 'profile-service',
+          },
+        },
       },
-    ])
+    ]),
   ],
-  providers: [
-    ProfileResolver,
-    ProfileService
-  ],
+  providers: [ProfileResolver, ProfileService],
 })
-export class ProfileModule { }
+export class ProfileModule {}

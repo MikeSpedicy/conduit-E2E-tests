@@ -1,4 +1,10 @@
-import { BadRequestException, Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import {
+  BadRequestException,
+  Inject,
+  Injectable,
+  Logger,
+  OnModuleInit,
+} from '@nestjs/common';
 import { ClientKafka, RpcException } from '@nestjs/microservices';
 import { map } from 'rxjs';
 import { CreateArticleInput } from '../../shared/types/article/input/create-article.input';
@@ -7,10 +13,9 @@ import { UpdateArticleInput } from '../../shared/types/article/input/update-arti
 const logger = new Logger();
 @Injectable()
 export class ArticleService implements OnModuleInit {
-
   constructor(
     @Inject('ARTICLE-SERVICE') private readonly articleClient: ClientKafka
-  ) { }
+  ) {}
 
   onModuleInit() {
     this.articleClient.subscribeToResponseOf('create_article');
@@ -33,7 +38,7 @@ export class ArticleService implements OnModuleInit {
     logger.log('GATEWAY - Calling Article Service');
 
     return this.articleClient.send('create_article', article).pipe(
-      map(newArticle => {
+      map((newArticle) => {
         if (!newArticle) {
           logger.log('GATEWAY - Article creation failed');
 
@@ -50,7 +55,7 @@ export class ArticleService implements OnModuleInit {
     logger.log('GATEWAY - Calling Article Service');
 
     return this.articleClient.send('update_article', article).pipe(
-      map(updatedArticle => {
+      map((updatedArticle) => {
         if (!updatedArticle) {
           logger.log('GATEWAY - Article not found');
 
@@ -60,30 +65,31 @@ export class ArticleService implements OnModuleInit {
         logger.log('GATEWAY - Article updated successfully');
         return updatedArticle;
       })
-    )
+    );
   }
 
   getAll(currentUser: string) {
     logger.log('GATEWAY - Calling Article Service');
 
-    return this.articleClient.send('get_all_articles', currentUser)
-      .pipe(map(articles => {
+    return this.articleClient.send('get_all_articles', currentUser).pipe(
+      map((articles) => {
         logger.log('GATEWAY - Articles retrieved');
 
         return articles;
-      }));
+      })
+    );
   }
 
   getByAuthor(author: string, currentUser: string) {
     logger.log('GATEWAY - Calling Article Service');
 
-    return this.articleClient.send('get_articles_by_author', { author, currentUser }).pipe(
-      map(articles => articles)
-    );
+    return this.articleClient
+      .send('get_articles_by_author', { author, currentUser })
+      .pipe(map((articles) => articles));
   }
 
   /**
-   * 
+   *
    * @param payload : {
    *  articleID
    *  currentUser
@@ -100,7 +106,7 @@ export class ArticleService implements OnModuleInit {
     logger.log('GATEWAY - Calling Article Service');
 
     return this.articleClient.send('get_articles_by_tag', payload).pipe(
-      map(articles => {
+      map((articles) => {
         logger.log('GATEWAY - Article by tag retrieved');
 
         return articles;
@@ -111,12 +117,13 @@ export class ArticleService implements OnModuleInit {
   getUserFavorited(payload) {
     logger.log('GATEWAY - Calling Article Service');
 
-    return this.articleClient.send('get_favorited_articles', payload)
-    .pipe(map(articles => {
-      logger.log('GATEWAY - Favorited articles retrieved');
+    return this.articleClient.send('get_favorited_articles', payload).pipe(
+      map((articles) => {
+        logger.log('GATEWAY - Favorited articles retrieved');
 
-      return articles;
-    }));
+        return articles;
+      })
+    );
   }
 
   favoriteArticle(favoriteArgs) {
@@ -148,13 +155,13 @@ export class ArticleService implements OnModuleInit {
   getCommentsByArticle(payload) {
     logger.log('GATEWAY - Calling Article Service');
 
-    return this.articleClient.send('get_comments_by_article', payload).pipe(
-      map(comments => comments)
-    );
+    return this.articleClient
+      .send('get_comments_by_article', payload)
+      .pipe(map((comments) => comments));
   }
 
   deleteComment(payload) {
-    logger.log('GATEWAY - Calling Article Service');
+    logger.log('GATEWAY - Calling Article Service to delete_comment');
 
     return this.articleClient.send('delete_comment', payload.id);
   }
@@ -165,7 +172,7 @@ export class ArticleService implements OnModuleInit {
     logger.log('GATEWAY - Calling Article Service');
 
     return this.articleClient.send('popular_tags', payload).pipe(
-      map(tags => {
+      map((tags) => {
         logger.log('GATEWAY - Popular Tags retrieved');
 
         return tags;

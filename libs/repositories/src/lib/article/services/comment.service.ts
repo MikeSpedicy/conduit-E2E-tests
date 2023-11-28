@@ -1,17 +1,16 @@
-import { Injectable, Logger } from "@nestjs/common";
-import { randomUUID } from "crypto";
-import { UserService } from "../../auth/services/user.service";
-import { CommentRepository } from "../comment.repository";
+import { Injectable, Logger } from '@nestjs/common';
+import { randomUUID } from 'crypto';
+import { UserService } from '../../auth/services/user.service';
+import { CommentRepository } from '../comment.repository';
 
 const logger = new Logger();
 
 @Injectable()
 export class CommentService {
-
   constructor(
     private readonly commentRepository: CommentRepository,
     private readonly userService: UserService
-  ) { }
+  ) {}
 
   async createComment(comment) {
     logger.log('ARTICLE-SERVICE: Comment creation method triggered');
@@ -27,11 +26,13 @@ export class CommentService {
   async getCommentsByArticle(payload) {
     logger.log('ARTICLE-SERVICE: Comments by article method triggered');
 
-    const comments = await this.commentRepository.getByArticle(payload.articleID);
+    const comments = await this.commentRepository.getByArticle(
+      payload.articleID
+    );
     const users = await this.userService.getAll();
 
     const mutatedComments = comments.map((comment) => {
-      const owner = users.find(user => user.email === comment.author);
+      const owner = users.find((user) => user.email === comment.author);
 
       return {
         ...comment,
@@ -39,19 +40,19 @@ export class CommentService {
           username: owner.username,
           email: owner.email,
           bio: owner.bio,
-          image: owner.image
-        }
-      }
+          image: owner.image,
+        },
+      };
     });
 
     return mutatedComments;
   }
 
   deleteComment(id) {
-    logger.log('ARTICLE-SERVICE: Delete comment method triggered');
+    logger.log(`ARTICLE-SERVICE: Delete comment method triggered, id - ${id}`);
 
     this.commentRepository.remove(id);
-    
+
     return id;
   }
 }

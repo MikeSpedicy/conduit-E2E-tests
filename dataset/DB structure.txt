@@ -1,0 +1,8 @@
+Note! This structure can include some mismatches.
+
+Articles - Partition keys: id; Clustering columns: author.
+Comments - PKs: id; CCs: article, author.
+Favorites - PKs: article; CCs: favorited_by.
+Followers - PKs: followed_profile; CCs: followed_by.
+Tags - PKs: name.
+Users - PKs: email.
