@@ -1,1 +1,1 @@
-*.ts filter=ignore-line
+*.ts custom-ignore-line=cpp-ignore

@@ -24,18 +24,22 @@ export class CassandraService {
       cloud: {
         secureConnectBundle:
           // Astra's DB secure-connect data
+          './libs/cassandra-service/src/lib/secure-connect-conduit-test-db.zip', // ignore-line
       },
       credentials: {
         // Astra's clientId value
         username:
-          // 1
+          // 2
+          'your value3', // ignore-line
         // Astra's secret value
         password:
           //
+          'your value3', // ignore-line
       },
       // keyspace of your DB
       keyspace:
         //
+        'conduit_test_db', // ignore-line
     });
   }
 
