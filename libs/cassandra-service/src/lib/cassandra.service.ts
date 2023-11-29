@@ -17,17 +17,25 @@ export class CassandraService {
 
     // Astra connection
     this.client = new Client({
+      // changes in lines with the ignore comment will not be sent to the repo if you make such configuration locally -
+      // `git config filter.ignore-line.clean "sed '/\/\/ ignore-line/d'"`;
+      // `git config filter.ignore-line.smudge "your value"`;
+      // `git config filter.ignore-line.required true`
       cloud: {
         secureConnectBundle:
           // Astra's DB secure-connect data
-          './libs/cassandra-service/src/lib/secure-connect-conduit-test-db.zip',
       },
       credentials: {
         // Astra's clientId value
+        username:
+          //
         // Astra's secret value
+        password:
+          //
       },
       // keyspace of your DB
-      keyspace: 'conduit_test_db',
+      keyspace:
+        //
     });
   }
 
