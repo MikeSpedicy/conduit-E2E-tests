@@ -28,7 +28,7 @@ export class CassandraService {
       credentials: {
         // Astra's clientId value
         username:
-          //
+          // 123
         // Astra's secret value
         password:
           //
