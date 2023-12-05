@@ -35,4 +35,3 @@ yarn-error.log*
 #java files
 E2ETests/SeleniumAutomation/Java/.gradle/
 E2ETests/SeleniumAutomation/Java/build/
-E2ETests/SeleniumAutomation/Java/gradle/

@@ -17,6 +17,7 @@ export class CassandraService {
 
     // Astra connection
     this.client = new Client({
+      // for example of the cassandra database see "dataset" folder in root of the repo.
       cloud: {
         secureConnectBundle:
           // Astra's DB secure-connect data
