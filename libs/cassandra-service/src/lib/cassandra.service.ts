@@ -25,9 +25,9 @@ export class CassandraService {
       },
       credentials: {
         // Astra's clientId value
-        username: 'your value',
+        username: process.env.astraUsername || 'your value',
         // Astra's secret value
-        password: 'your value',
+        password: process.env.astraPassword || 'your value',
       },
       // keyspace of your DB
       keyspace: 'conduit_test_db',
