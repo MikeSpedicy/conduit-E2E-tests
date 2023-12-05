@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { Client, mapping, auth } from 'cassandra-driver';
+import { Injectable, Logger } from '@nestjs/common';
+import { Client, mapping } from 'cassandra-driver';
+
+const logger = new Logger();
 
 @Injectable()
 export class CassandraService {
@@ -14,6 +16,10 @@ export class CassandraService {
     //   localDataCenter: 'datacenter1',
     //   authProvider: new auth.PlainTextAuthProvider('cassandra', 'cassandra'),
     // });
+
+    logger.log(
+      `process.env values: ${process.env.astraUsername}, ${process.env.astraPassword}`
+    );
 
     // Astra connection
     this.client = new Client({
