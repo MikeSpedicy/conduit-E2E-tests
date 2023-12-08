@@ -70,6 +70,14 @@ pipeline {
                 }
             }
         }
+
+        // stage('Approve Commit') {
+        //     steps {
+        //         git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
+        //             approve 'Approved by jenkins', onlyIfSuccessful: true
+        //         }
+        //     }
+        // }
         
     }
     post {
@@ -88,6 +96,11 @@ pipeline {
                 reportName: 'Reports',
                 reportTitles: 'Tests Report'
             ])
+            // push changes to the master branch
+            // powershell "git "
+            git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
+                approve 'Approved by jenkins'
+            }
             // archiveArtifacts '*.jar'
         }
         always {
