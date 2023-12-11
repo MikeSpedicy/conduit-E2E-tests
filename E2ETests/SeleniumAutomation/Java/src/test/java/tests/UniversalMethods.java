@@ -23,6 +23,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.devtools.NetworkInterceptor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import tests.Login.CodeToExecute;
@@ -236,6 +237,19 @@ public class UniversalMethods {
     reqRespData.put("response", responses.get(0));
 
     return reqRespData;
+  }
+
+  public void CheckRedirection(String linkSelector, String linkText, String redirUrl) {
+    WebDriver driver = LoginMain.driver;
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement linkElement = driver.findElement(By.cssSelector(linkSelector));
+
+    assertTrue(linkElement.isDisplayed());
+    assertEquals(linkText, linkElement.getAttribute("text"));
+
+    linkElement.click();
+
+    wait.until(ExpectedConditions.urlToBe(redirUrl));
   }
 
 }

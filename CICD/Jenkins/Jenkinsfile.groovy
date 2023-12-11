@@ -1,6 +1,5 @@
 pipeline {
     agent any
-    // some small other fake changes
     // environment {
     //     astraUsername = credentials("${astraUsername}")
     //     astraPassword = credentials("${astraPassword}")

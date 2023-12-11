@@ -95,6 +95,21 @@ public class LoginMain {
         loginMethods.Authorization("a", "", null);
     }
 
+    @Test
+    @DisplayName("Login page - Positive - Redirections")
+    void LoginRedir() {
+        ///////////////////////// should be replaced by one universal logic/method
+        JsonObject initialSelectorsList = universalMethods.ReadSelectorsJSON();
+        JsonObject authPages = initialSelectorsList.getJsonObject("authPages");
+        JsonObject authPagesSel = universalMethods.UpdateSelectorsList(authPages,
+                initialSelectorsList.getString("attrName"));
+        UniversalVariables universalVariables = UniversalVariables.getInstance();
+        JsonObject envVar = universalVariables.getEnvVariableList();
+        /////////////////////////
+        universalMethods.CheckRedirection(authPagesSel.getString("accountLink"), "Need an account? ",
+                envVar.getString("registerPageUrl"));
+    }
+
     @AfterEach
     void postTestConditions() {
         // makes basic clearing of the page's state
