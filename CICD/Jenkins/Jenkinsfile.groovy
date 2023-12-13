@@ -98,9 +98,9 @@ pipeline {
             ])
             // push changes to the master branch
             // powershell "git "
-            git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
-                approve 'Approved by jenkins'
-            }
+            // git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
+            //     approve 'Approved by jenkins'
+            // } // later shoul check how to configure git commit approving in Jenkins
             // archiveArtifacts '*.jar'
         }
         always {
