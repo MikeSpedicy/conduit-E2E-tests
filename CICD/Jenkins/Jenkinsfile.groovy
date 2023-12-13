@@ -10,7 +10,7 @@ pipeline {
         stage('Build repo and start Frontend') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git'
+                git branch: 'test', credentialsId: '9b052a9c-9e56-40b6-b305-63ff570a1c86', url: 'https://github.com/MikeSpedicy/conduit-E2E-tests'
                 script {
                     def dockerLogFilePath = 'logfileDocker.txt'
                     def frontLogFilePath = 'logfileFront.txt'
