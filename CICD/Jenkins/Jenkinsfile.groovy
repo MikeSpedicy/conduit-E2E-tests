@@ -10,7 +10,8 @@ pipeline {
         stage('Build repo and start Frontend') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'test', credentialsId: '9b052a9c-9e56-40b6-b305-63ff570a1c86', url: 'https://github.com/MikeSpedicy/conduit-E2E-tests'
+                // git branch: 'test', credentialsId: '9b052a9c-9e56-40b6-b305-63ff570a1c86', url: 'https://github.com/MikeSpedicy/conduit-E2E-tests'
+                checkout scm
                 script {
                     def dockerLogFilePath = 'logfileDocker.txt'
                     def frontLogFilePath = 'logfileFront.txt'
@@ -97,6 +98,15 @@ pipeline {
                 reportTitles: 'Tests Report'
             ])
             // push changes to the master branch
+            def source_branch = 'test'
+            def targetBranch = 'master'
+
+            // Fetch and merge changes from the feature branch to the target branch
+            // sh "git fetch origin ${source_branch}:${source_branch}"
+            sh "git checkout ${targetBranch}"
+            sh "git merge ${source_branch}" //  --no-ff --no-commit
+            // sh "git commit -m 'Merge changes from ${source_branch}'"
+            sh "git push origin ${targetBranch}"
             // powershell "git "
             // git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
             //     approve 'Approved by jenkins'
