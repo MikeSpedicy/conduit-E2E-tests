@@ -97,16 +97,16 @@ pipeline {
                 reportName: 'Reports',
                 reportTitles: 'Tests Report'
             ])
+            // push changes to the master branch
             script {
-                // push changes to the master branch
                 def source_branch = 'test'
                 def targetBranch = 'master'
                 // Fetch and merge changes from the feature branch to the target branch
-                // sh "git fetch origin ${source_branch}:${source_branch}"
-                sh "git checkout ${targetBranch}"
-                sh "git merge ${source_branch}" //  --no-ff --no-commit
-                // sh "git commit -m 'Merge changes from ${source_branch}'"
-                sh "git push origin ${targetBranch}"
+                // powershell "git fetch origin ${source_branch}:${source_branch}"
+                bat "git checkout ${targetBranch}"
+                bat "git merge ${source_branch}" //  --no-ff --no-commit
+                // powershell "git commit -m 'Merge changes from ${source_branch}'"
+                bat "git push origin ${targetBranch}"
                 // powershell "git "
                 // git 'https://github.com/MikeSpedicy/conduit-E2E-tests.git' {
                 //     approve 'Approved by jenkins'
